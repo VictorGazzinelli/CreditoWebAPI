@@ -2,6 +2,6 @@
 {
     public class BadRequestResponse
     {
-        public Dictionary<string, List<string>> Errors { get; set; }
+        public IDictionary<string, string[]> Errors { get; set; }
     }
 }

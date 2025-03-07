@@ -12,6 +12,9 @@ namespace CreditoWebAPI.Domain.Entities
         public DateTimeOffset Data { get; set; } 
         public StatusPorpostaEnum Status { get; set; }
 
+        public DateTimeOffset InseridaEm { get; set; }
+        public DateTimeOffset? ConcluidaEm { get; set; }
+
         public string CpfProponente { get; set; }
         public Guid IdAgente { get; set; } 
         public Guid IdLoja { get; set; }

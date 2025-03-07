@@ -11,16 +11,11 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
+    <PackageReference Include="Polly" Version="8.5.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CreditoWebAPI.Domain\CreditoWebAPI.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Requests\" />
   </ItemGroup>
 
 </Project>

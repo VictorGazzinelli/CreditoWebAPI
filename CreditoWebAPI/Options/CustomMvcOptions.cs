@@ -10,7 +10,7 @@ namespace CreditoWebAPI.Options
         {
             options.Filters.Add<ExceptionFilter>();
             options.Filters.Add(new ProducesResponseTypeAttribute(typeof(BadRequestResponse), StatusCodes.Status400BadRequest));
-            options.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), StatusCodes.Status401Unauthorized));
+            options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status401Unauthorized));
             options.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), StatusCodes.Status500InternalServerError));
         }
     }

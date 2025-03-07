@@ -1,6 +1,10 @@
-﻿using CreditoWebAPI.Handlers;
+﻿using CreditoWebAPI.Application;
+using CreditoWebAPI.Handlers;
+using CreditoWebAPI.Infrastructure;
 using CreditoWebAPI.Options;
 using CreditoWebAPI.Utils;
+using CreditoWebAPI.Validators.Extensions;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +27,10 @@ namespace CreditoWebAPI
             services.AddHttpClient();
             services.Configure<ApiBehaviorOptions>(CustomApiBehaviourOptions.SuppressDefaultFilters);
             services.AddControllers(CustomMvcOptions.AddCustomResponseFilters);
+
+            services.AddValidatorsFromAssemblyContaining(typeof(ValidatorExtensions));
+            services.AddApplicationDependencies();
+            services.AddInfrastructureDependencies();
         }
 
         public static void ConfigureHttpRequestPipeline(this WebApplication app)
