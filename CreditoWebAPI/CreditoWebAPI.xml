@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditoWebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CreditoWebAPI.Controllers.WeatherForecastController.Get">
+            <summary>
+            Get a list of weather forecasts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CreditoWebAPI.Handlers.BasicAuthenticationHandler.CredentialsAreValid(System.String,System.String)">
+            This simplistic credential validation function is for demonstration purposes only.
+            
+            WARNING: This is a highly insecure and overly simplified implementation.
+                     It should NEVER be used in a real-world production scenario.
+                     Proper credential validation should involve:
+                     - Secure password hashing (e.g., bcrypt, Argon2)
+                     - Secure storage of credentials (e.g., hashed passwords in a database)
+                     - Protection against brute-force attacks (e.g., rate limiting, account lockout)
+                     - Multi-factor authentication (MFA) for added security
+        </member>
+    </members>
+</doc>

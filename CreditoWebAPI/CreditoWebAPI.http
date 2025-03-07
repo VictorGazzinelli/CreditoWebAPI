@@ -1,0 +1,6 @@
+@CreditoWebAPI_HostAddress = https://localhost:44371/
+
+GET {{CreditoWebAPI_HostAddress}}WeatherForecast
+Accept: application/json
+
+###
