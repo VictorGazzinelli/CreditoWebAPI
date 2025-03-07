@@ -1,9 +1,7 @@
-﻿using CreditoWebAPI.Application.Dtos;
-using CreditoWebAPI.Application.Requests.Propostas;
+﻿using CreditoWebAPI.Application.Requests.Propostas;
+using CreditoWebAPI.Application.Responses.Propostas;
 using CreditoWebAPI.Inputs.Propostas;
-using CreditoWebAPI.Responses;
 using CreditoWebAPI.Validators.Propostas;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -11,20 +9,10 @@ namespace CreditoWebAPI.Controllers
 {
     public class PropostaController : ApiController
     {
-        public PropostaController()
-        {
-
-        }
-
         [HttpPost]
         public async Task<IStatusCodeActionResult> Incluir(IncluirPropostaInput input, CancellationToken cancellationToken)
         {
-            IncluirPropostaInputValidator inputValidator = new IncluirPropostaInputValidator();
-
-            ValidationResult validationResult = inputValidator.Validate(input);
-
-            if (!validationResult.IsValid)
-                return CreatePropostaInvalidaResponse(validationResult.ToDictionary());
+            Validate<IncluirPropostaInput, IncluirPropostaInputValidator>(input);
 
             IncluirPropostaRequisicao requisicao = new IncluirPropostaRequisicao()
             {
@@ -37,15 +25,56 @@ namespace CreditoWebAPI.Controllers
                 Data = input.Data
             };
 
-            PropostaValidaDto proposta = (await Mediator.Send(requisicao, cancellationToken)).Proposta;
+            IncluirPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
 
-            if (!proposta.EhValida)
-                return CreatePropostaInvalidaResponse();
-
-            return Accepted(proposta);
+            return Ok(resposta);
         }
 
-        private IStatusCodeActionResult CreatePropostaInvalidaResponse(IDictionary<string, string[]> errors = null)
-            => BadRequest(new BadRequestResponse() { Errors = errors ?? new Dictionary<string, string[]>() { { "Proposta", ["Proposta invalida"] } } });
+        [HttpPost]
+        public async Task<IStatusCodeActionResult> Simular(SimularPropostaInput input, CancellationToken cancellationToken)
+        {
+            Validate<SimularPropostaInput, SimularPropostaInputValidator>(input);
+
+            SimularPropostaRequisicao requisicao = new SimularPropostaRequisicao()
+            {
+                CpfProponente = input.CpfProponente,
+                ValorSolicitado = input.ValorSolicitado,
+                QuantidadeParcelas = input.QuantidadeParcelas,
+            };
+
+            SimularPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
+
+            return Ok(resposta);
+        }
+
+        [HttpPut]
+        public async Task<IStatusCodeActionResult> Validar(ValidarPropostaInput input, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public async Task<IStatusCodeActionResult> Processar(ProcessarPropostaInput input, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
+        public async Task<IStatusCodeActionResult> Reprovar(ReprovarPropostaInput input, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public async Task<IStatusCodeActionResult> Listar([FromQuery] ListarPropostaInput input, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public async Task<IStatusCodeActionResult> Obter([FromQuery] ObterPropostaInput input, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -18,6 +18,6 @@ namespace CreditoWebAPI.Validators.Cpfs
         }
 
         protected override string GetDefaultMessageTemplate(string errorCode)
-            => "Valor invalido.";
+            => "Valor invalido. Esperava valor monetario acima de 0";
     }
 }

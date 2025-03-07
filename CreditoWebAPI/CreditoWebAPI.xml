@@ -4,12 +4,6 @@
         <name>CreditoWebAPI</name>
     </assembly>
     <members>
-        <member name="M:CreditoWebAPI.Controllers.WeatherForecastController.Get">
-            <summary>
-            Get a list of weather forecasts.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:CreditoWebAPI.Handlers.BasicAuthenticationHandler.CredentialsAreValid(System.String,System.String)">
             This simplistic credential validation function is for demonstration purposes only.
             

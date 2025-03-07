@@ -36,7 +36,7 @@ namespace CreditoWebAPI.Options
             options.CustomSchemaIds(type => type.ToString());
             options.SwaggerDoc(ApiConstants.Version, openApiInfo);
             options.OrderActionsBy((apiDesc) => $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}_{apiDesc.RelativePath}");
-            //options.IncludeXmlComments(xmlFilePath);
+            options.IncludeXmlComments(xmlFilePath);
             options.AddSecurityDefinition(ApiConstants.AuthScheme, basicAuthOpenApiSecurityScheme);
             options.AddSecurityRequirement(basicAuthOpenApiSecurityRequirement);
         }

@@ -9,6 +9,7 @@ namespace CreditoWebAPI.Domain.Entities
         public string Nome { get; set; } 
         public string Endereco { get; set; } 
         public string Uf { get; set; }
+        public bool Homologada { get; set; }
 
         public ICollection<Proposta> Propostas { get; set; }
 

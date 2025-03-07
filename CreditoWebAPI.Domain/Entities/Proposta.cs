@@ -10,10 +10,7 @@ namespace CreditoWebAPI.Domain.Entities
         public int QuantidadeParcelas { get; set; } 
         public double ValorParcela { get; set; } 
         public DateTimeOffset Data { get; set; } 
-        public StatusPorpostaEnum Status { get; set; }
-
-        public DateTimeOffset InseridaEm { get; set; }
-        public DateTimeOffset? ConcluidaEm { get; set; }
+        public StatusPropostaEnum Status { get; set; }
 
         public string CpfProponente { get; set; }
         public Guid IdAgente { get; set; } 
@@ -22,5 +19,8 @@ namespace CreditoWebAPI.Domain.Entities
         public Proponente Proponente { get; set; } 
         public Agente Agente { get; set; } 
         public Loja Loja { get; set; }
+
+        public DateTimeOffset InseridaEm { get; set; }
+        public DateTimeOffset? ConcluidaEm { get; set; }
     }
 }
