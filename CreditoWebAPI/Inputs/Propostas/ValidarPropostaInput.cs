@@ -2,5 +2,6 @@
 {
     public class ValidarPropostaInput
     {
+        public Guid Id { get; set; }
     }
 }

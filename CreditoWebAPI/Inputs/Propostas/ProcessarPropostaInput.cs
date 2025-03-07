@@ -2,5 +2,6 @@
 {
     public class ProcessarPropostaInput
     {
+        public Guid Id { get; set; }
     }
 }

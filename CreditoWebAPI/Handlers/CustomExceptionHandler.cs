@@ -15,7 +15,9 @@ namespace CreditoWebAPI.Handlers
             [typeof(LojaNaoEncontradaException)] = HandleLojaNaoEncontradaException,
             [typeof(LojaNaoHomologadaException)] = HandleLojaNaoHomologadaException,
             [typeof(ProponenteNaoEncontradoException)] = HandleProponenteNaoEncontradoException,
-            [typeof(ValorParcelaExcedeLimiteException)] = HandleValorParcelaExcedeLimiteException,
+            [typeof(ValorSolicitadoExcedeLimiteException)] = HandleValorParcelaExcedeLimiteException,
+            [typeof(PropostaNaoEncontradaException)] = HandlePropostaNaoEncontradaException,
+            [typeof(IdadeMaximaExcedidaException)] = HandleIdadeMaximaExcedidaException,
         };
 
         public static int HandleException(Exception exception)
@@ -71,6 +73,12 @@ namespace CreditoWebAPI.Handlers
             => new ErrorResponse(exception as ProponenteNaoEncontradoException);
 
         private static ErrorResponse HandleValorParcelaExcedeLimiteException(Exception exception)
-            => new ErrorResponse(exception as ValorParcelaExcedeLimiteException);
+            => new ErrorResponse(exception as ValorSolicitadoExcedeLimiteException);
+
+        private static ErrorResponse HandlePropostaNaoEncontradaException(Exception exception)
+            => new ErrorResponse(exception as PropostaNaoEncontradaException);
+
+        private static ErrorResponse HandleIdadeMaximaExcedidaException(Exception exception)
+            => new ErrorResponse(exception as IdadeMaximaExcedidaException);
     }
 }

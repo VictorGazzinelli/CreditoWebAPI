@@ -59,10 +59,22 @@ namespace CreditoWebAPI.Responses
             Message = proponenteNaoEncontradoException.Message;
         }
 
-        public ErrorResponse(ValorParcelaExcedeLimiteException valorParcelaExcedeLimiteException)
+        public ErrorResponse(ValorSolicitadoExcedeLimiteException valorParcelaExcedeLimiteException)
         {
             StatusCode = 400;
             Message = valorParcelaExcedeLimiteException.Message;
+        }
+
+        public ErrorResponse(PropostaNaoEncontradaException propostaNaoEncontradaException)
+        {
+            StatusCode = 404;
+            Message = propostaNaoEncontradaException.Message;
+        }
+
+        public ErrorResponse(IdadeMaximaExcedidaException idadeMaximaExcedidaException)
+        {
+            StatusCode = 400;
+            Message = idadeMaximaExcedidaException.Message;
         }
 
         public ObjectResult AsObjectResult()

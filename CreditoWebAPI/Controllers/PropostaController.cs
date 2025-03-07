@@ -22,7 +22,14 @@ namespace CreditoWebAPI.Controllers
                 ValorSolicitado = input.ValorSolicitado,
                 QuantidadeParcelas = input.QuantidadeParcelas,
                 ValorParcela = input.ValorParcela,
-                Data = input.Data
+                Data = input.Data,
+                DataNascimento = input.DataNascimento,
+                Email = input.Email,
+                Endereco = input.Endereco,
+                Nome = input.Nome,
+                NumeroInss = input.NumeroInss,
+                Telefone = input.Telefone,
+                ValorAposentadoria = input.ValorAposentadoria,
             };
 
             IncluirPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
@@ -50,31 +57,51 @@ namespace CreditoWebAPI.Controllers
         [HttpPut]
         public async Task<IStatusCodeActionResult> Validar(ValidarPropostaInput input, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            ValidarPropostaRequisicao requisicao = new ValidarPropostaRequisicao()
+            {
+                Id = input.Id,
+            };
+
+            ValidarPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
+
+            return Ok(resposta);
         }
 
         [HttpPost]
         public async Task<IStatusCodeActionResult> Processar(ProcessarPropostaInput input, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            ProcessarPropostaRequisicao requisicao = new ProcessarPropostaRequisicao()
+            {
+                Id = input.Id,
+            };
 
-        [HttpPut]
-        public async Task<IStatusCodeActionResult> Reprovar(ReprovarPropostaInput input, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+            await Mediator.Send(requisicao, cancellationToken);
 
-        [HttpGet]
-        public async Task<IStatusCodeActionResult> Listar([FromQuery] ListarPropostaInput input, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            return Ok();
         }
 
         [HttpGet]
         public async Task<IStatusCodeActionResult> Obter([FromQuery] ObterPropostaInput input, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            ObterPropostaRequisicao requisicao = new ObterPropostaRequisicao()
+            {
+                Id = input.Id,
+            };
+
+            ObterPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
+
+            return Ok(resposta);
         }
+
+        [HttpGet]
+        public async Task<IStatusCodeActionResult> Listar(CancellationToken cancellationToken)
+        {
+            ListarPropostaRequisicao requisicao = new ListarPropostaRequisicao();
+
+            ListarPropostaResposta resposta = await Mediator.Send(requisicao, cancellationToken);
+
+            return Ok(resposta);
+        }
+
     }
 }

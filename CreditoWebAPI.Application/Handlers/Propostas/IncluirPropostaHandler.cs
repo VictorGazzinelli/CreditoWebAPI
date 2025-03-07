@@ -31,8 +31,23 @@ namespace CreditoWebAPI.Application.Handlers.Propostas
         {
             (Proponente proponente, Agente agente, Loja loja) = await ObterEntidadesRelacionadasAsync(request, cancellationToken);
 
+            if(proponente.Propostas.Any(p => !p.Status.FoiFinalizada))
+                throw new ProponentePossuiPropostaEmAbertoException("Proponente possui proposta em aberto");
+
+            if(CpfEstaEmListaDeFraudadores(request.CpfProponente))
+                throw new ProponenteFraudadorException("Proponente Fraudador");
+
             if (!agente.Ativo)
                 throw new AgenteInativoException("Agente esta inativo");
+
+            if (UfPossuiRestricaoDeValor(loja.Uf, request.ValorSolicitado))
+                throw new ValorSolicitadoExcedeLimiteException("Valor solicitado excede o limite permitido para a UF da loja");
+
+            double idadePrepotente = DateTimeOffset.Now.Subtract(proponente.DataNascimento).TotalDays / 365.25;
+            double anosPagamento = request.QuantidadeParcelas / 12;
+
+            if (idadePrepotente + anosPagamento > 80)
+                throw new IdadeMaximaExcedidaException("Idade maxima para ultimo pagamento excedida");
 
             if (!loja.Homologada)
                 throw new LojaNaoHomologadaException("Loja nao foi homologada");
@@ -61,12 +76,34 @@ namespace CreditoWebAPI.Application.Handlers.Propostas
             return resposta;
         }
 
+        private bool UfPossuiRestricaoDeValor(string uf, double valorSolicitado)
+            => uf == "RS" && valorSolicitado > 10000;
+
+        private bool CpfEstaEmListaDeFraudadores(string cpfProponente)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<(Proponente proponente, Agente agente, Loja loja)> ObterEntidadesRelacionadasAsync(IncluirPropostaRequisicao request, CancellationToken cancellationToken)
         {
             Proponente proponente = await _proponenteRepositorio.ObterAsync(request.CpfProponente, cancellationToken);
 
             if (proponente == null)
-                throw new ProponenteNaoEncontradoException($"Proponenete com cpf {request.CpfProponente} nao encontrado");
+            {
+                proponente = new Proponente()
+                {
+                    Cpf = request.CpfProponente,
+                    Nome = request.Nome,
+                    DataNascimento = request.DataNascimento,
+                    NumeroInss = request.NumeroInss,
+                    ValorAposentadoria = request.ValorAposentadoria,
+                    Endereco = request.Endereco,
+                    Telefone = request.Telefone,
+                    Email = request.Email,
+                };
+
+                await _proponenteRepositorio.InserirAsync(proponente, cancellationToken);
+            }
 
             Agente agente = await _agenteRepositorio.ObterAsync(request.IdAgente, cancellationToken);
 

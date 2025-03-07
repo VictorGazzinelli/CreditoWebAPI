@@ -32,7 +32,7 @@ namespace CreditoWebAPI.Application.Handlers.Propostas
             double valorMaximoParcela = proponente.ValorAposentadoria * 0.3;
 
             if(valorParcela > valorMaximoParcela)
-                throw new ValorParcelaExcedeLimiteException($"Valor da parcela excede o limite de 30% da aposentadoria do proponente");
+                throw new ValorSolicitadoExcedeLimiteException($"Valor da parcela excede o limite de 30% da aposentadoria do proponente");
 
             SimularPropostaResposta resposta = new SimularPropostaResposta()
             {

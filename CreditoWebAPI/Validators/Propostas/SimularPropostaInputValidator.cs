@@ -16,7 +16,9 @@ namespace CreditoWebAPI.Validators.Propostas
 
             RuleFor(input => input.QuantidadeParcelas)
                 .GreaterThan(0)
-                .WithMessage("A quantidade de parcelas deve ser maior que zero.");
+                .WithMessage("A quantidade de parcelas deve ser maior que zero.")
+                .LessThanOrEqualTo(60)
+                .WithMessage("A quantidade de parcelas deve ser menor que sessenta.");
         }
     }
 }

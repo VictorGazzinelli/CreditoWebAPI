@@ -11,6 +11,7 @@ namespace CreditoWebAPI.Domain.Entities
         public double ValorParcela { get; set; } 
         public DateTimeOffset Data { get; set; } 
         public StatusPropostaEnum Status { get; set; }
+        public string? MotivoRejeicao { get; set; }
 
         public string CpfProponente { get; set; }
         public Guid IdAgente { get; set; } 

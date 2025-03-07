@@ -8,7 +8,6 @@ namespace CreditoWebAPI.Domain.Entities
         public string Cpf { get; set; } 
         public string Nome { get; set; } 
         public DateTimeOffset DataNascimento { get; set; }
-        public string Uf { get; set; }
         public double ValorAposentadoria { get; set; } 
         public string NumeroInss { get; set; } 
         public string Endereco { get; set; } 

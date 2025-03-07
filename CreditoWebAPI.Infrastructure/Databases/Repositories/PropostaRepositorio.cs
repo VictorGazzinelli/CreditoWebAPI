@@ -16,12 +16,12 @@ namespace CreditoWebAPI.Infrastructure.Database.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Proposta> ListarAsync(Expression<Func<Proposta, bool>> predicate, CancellationToken cancellationToken)
+        public Task<Proposta> ObterAsync(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Proposta> ObterAsync(Guid id, CancellationToken cancellationToken)
+        public Task<IQueryable<Proposta>> ListarAsync(Expression<Func<Proposta, bool>> predicate, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
